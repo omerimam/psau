@@ -11,6 +11,10 @@ Original file is located at
 
 #pip install streamlit
 
+!pip install openai streamlit
+
+
+
 import streamlit as st
 from datetime import date, timedelta
 import sqlite3
