@@ -11,17 +11,6 @@ Original file is located at
 
 #pip install streamlit
 
-import os
-
-# أنشئ مجلد .streamlit إذا لم يكن موجود
-os.makedirs("/root/.streamlit", exist_ok=True)
-
-# اكتب مفتاح OpenAI في ملف secrets.toml
-with open("/root/.streamlit/secrets.toml", "w") as f:
-    f.write("""
-OPENAI_API_KEY = "ضع_هنا_مفتاحك_sk-xxx"
-""")
-
 import streamlit as st
 from datetime import date, timedelta
 import sqlite3
@@ -36,15 +25,16 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# =========================
-# قراءة مفتاح OpenAI من st.secrets
-# =========================
 
+# =============================
+# إعداد مفتاح OpenAI API من Streamlit Secrets
+# =============================
 try:
     openai.api_key = st.secrets["OPENAI_API_KEY"]
 except KeyError:
     st.error("⚠️ مفتاح OpenAI API غير موجود. الرجاء إضافته في Streamlit Secrets باسم 'OPENAI_API_KEY'.")
     st.stop()
+
 
 # =========================
 # قاعدة بيانات تجريبية في الذاكرة
